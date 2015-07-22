@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name></display-name>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetJobs</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.GetJobs</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetJobs</servlet-name>
+    <url-pattern>/servlet/GetJobs</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>login.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>ProcessJob</display-name>
+    <servlet-name>ProcessJob</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.ProcessJob</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetTemplates</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.GetTemplates</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetTemplateXML</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.GetTemplateXML</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetTemplatesAll</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.GetTemplatesAll</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AddTemplate</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.AddTemplate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DeleteTemplate</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.DeleteTemplate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UpdateTemplate</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.UpdateTemplate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AddJob</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.AddJob</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DeleteJob</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.DeleteJob</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetJobsAll</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.GetJobsAll</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UpdateJob</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.UpdateJob</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProcessJob</servlet-name>
+    <url-pattern>/servlet/ProcessJob</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetTemplates</servlet-name>
+    <url-pattern>/servlet/GetTemplates</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetTemplateXML</servlet-name>
+    <url-pattern>/servlet/GetTemplateXML</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetTemplatesAll</servlet-name>
+    <url-pattern>/servlet/GetTemplatesAll</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddTemplate</servlet-name>
+    <url-pattern>/servlet/AddTemplate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteTemplate</servlet-name>
+    <url-pattern>/servlet/DeleteTemplate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdateTemplate</servlet-name>
+    <url-pattern>/servlet/UpdateTemplate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddJob</servlet-name>
+    <url-pattern>/servlet/AddJob</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteJob</servlet-name>
+    <url-pattern>/servlet/DeleteJob</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetJobsAll</servlet-name>
+    <url-pattern>/servlet/GetJobsAll</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdateJob</servlet-name>
+    <url-pattern>/servlet/UpdateJob</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RedirectServlet</servlet-name>
+    <servlet-class>cn.edu.sjtu.dcl.servlet.RedirectServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RedirectServlet</servlet-name>
+    <url-pattern>/ws</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <filter-name>springFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>springFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>sessionUser</filter-name>
+    <filter-class>cn.edu.sjtu.dcl.struts.filter.SessionFilter</filter-class>
+    <init-param>
+      <param-name>userService</param-name>
+      <param-value>userService</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>sessionUser</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>struts</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>struts</filter-name>
+    <url-pattern>*.action</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>hibernateFilter</filter-name>
+    <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+    <init-param>
+      <param-name>sessionFactoryBeanName</param-name>
+      <param-value>sessionFactory</param-value>
+    </init-param>
+    <init-param>
+      <param-name>singleSession</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>hibernateFilter</filter-name>
+    <servlet-name>action</servlet-name>
+  </filter-mapping>
+  <listener>
+    <listener-class>cn.edu.sjtu.dcl.struts.filter.StartupListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext-*.xml</param-value>
+  </context-param>
+  
+  <!--   ##################### for restful api #############################-->
+  <context-param>
+      <param-name>javax.ws.rs.core.Application</param-name>
+      <param-value>cn.edu.sjtu.dcl.restful.RestApplication</param-value>
+  </context-param>
+  
+  <context-param>
+  	<param-name>resteasy.servlet.mapping.prefix</param-name>
+  	<param-value>/rest</param-value>    
+  </context-param>
+  
+  <context-param>
+  	<param-name>resteasy.providers</param-name>
+  	<param-value>cn.edu.sjtu.dcl.rest.exception.RestInnerExceptionMapper,cn.edu.sjtu.dcl.rest.exception.NotFoundExceptionMapper</param-value>    
+  </context-param>
+  
+  <listener>
+      <listener-class>
+          org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+      </listener-class>
+  </listener>
+  
+  <servlet>
+      <servlet-name>RestApi</servlet-name>
+      <servlet-class>
+          org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+      </servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>RestApi</servlet-name>
+      <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+  
+</web-app>

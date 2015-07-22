@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+</head>
+<body>
+ <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span">
+         <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">作业库管理</li>
+              <li><a href="/DataProcess_WEB/admin/getPersonalJob.action?pno=1"  target="contentFrame">开发者作业管理</a></li>
+              <li><a href="/DataProcess_WEB/admin/getJobList.action?pno=1" target="contentFrame">作业查看</a></li>
+              <li class="nav-header">作业组合模板库管理</li>
+              <li><a href="/DataProcess_WEB/admin/getPersonalHistory.action?pno=1" target="contentFrame">历史作业组合</a></li>
+              <li><a href="/DataProcess_WEB/admin/getTemplateList.action?pno=1" target="contentFrame">模板查看</a></li>
+              <li><a href="/DataProcess_WEB/admin/getPersonalTemplate.action?pno=1"  target="contentFrame">开发者模板管理</a></li>
+              <li class="nav-header">作业组合运行</li>
+              <li><a href="/DataProcess_WEB/admin/flex.action" target="contentFrame">作业组合</a></li>
+              <li><a href="#">作业运行管理</a></li>
+                            <li class="nav-header">系统管理</li>
+              <li><a href="/DataProcess_WEB/admin/getJobStatus.action?pno=1" target="contentFrame">作业状态查询</a></li>
+              <li><a href="#">虚拟机管理</a></li>
+              <li><a href="#">日志查看</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        </div>
+        </div>
+</body>
+</html>

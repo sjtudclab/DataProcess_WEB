@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	
+	<bean id="loginAction" class="cn.edu.sjtu.dcl.action.LoginAction">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<bean id="jobAction" class="cn.edu.sjtu.dcl.action.JobAction">
+		<property name="jobService" ref="jobService"></property>
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<bean id="jobStatusAction" class="cn.edu.sjtu.dcl.action.JobStatusAction">
+		<property name="jobStatusService" ref="jobStatusService"></property>
+	</bean>
+	
+	
+	<bean id="templateAction" class="cn.edu.sjtu.dcl.action.TemplateAction">
+		<property name="tempService" ref="tempService"></property>
+	</bean>
+	
+	<bean id="historyAction" class="cn.edu.sjtu.dcl.action.HistoryAction">
+		<property name="historyService" ref="historyService"></property>
+	</bean>
+	
+	<bean id="uploadAction" class="cn.edu.sjtu.dcl.action.UploadAction">
+	   	<property name="jobService" ref="jobService"></property>
+	</bean>
+	
+	<bean id="flexAction" class="cn.edu.sjtu.dcl.action.FlexAction">
+	<property name="tempService" ref="tempService"></property>
+	</bean>
+	
+	<bean id="userAction" class="cn.edu.sjtu.dcl.action.UserAction">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	
+	</beans>

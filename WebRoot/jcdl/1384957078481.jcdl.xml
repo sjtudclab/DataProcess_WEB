@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<composition name="job composition designer">
+    <start location="254,196" name="start">
+        <transition to="StudentAverageScore_0"/>
+    </start>
+    <job iterationtimes="1" iterative="false" jobid="16" location="420,206" name="StudentAverageScore_0">
+        <inputpath>input</inputpath>
+        <outputpath>output</outputpath>
+        <parameters>
+            <property>null</property>
+            <value>abc</value>
+        </parameters>
+        <transition to="end2"/>
+    </job>
+    
+    <end location="617,205" name="end2"/>
+</composition>

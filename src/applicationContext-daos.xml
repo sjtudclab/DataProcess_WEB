@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Spring配置文件的Schema信息 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util.xsd">
+	<!-- 定义数据源Bean，使用C3P0数据源实现 -->
+	
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="username" value="root"/>
+		<property name="url" value="jdbc:mysql://192.168.1.254:3306/trafficdataprocess?characterEncoding=utf-8"/>
+		<property name="password" value="root"/>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	</bean>
+ 	<!--  
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="username" value="root"/>
+		<property name="url" value="jdbc:mysql://172.30.0.202:3306/trafficdataprocess?characterEncoding=utf-8"/>
+		<property name="password" value="123456"/>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	</bean>
+	-->
+	
+	<bean id="userDAO" class="cn.edu.sjtu.dcl.dao.impl.UserDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="historyDAO" class="cn.edu.sjtu.dcl.dao.impl.HistoryDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="jobDAO" class="cn.edu.sjtu.dcl.dao.impl.JobDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="tempDAO" class="cn.edu.sjtu.dcl.dao.impl.TemplateDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="jobRelationDAO" class="cn.edu.sjtu.dcl.dao.impl.JobRelationDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+
+		<property name="packagesToScan">
+			<list>
+				<value>cn.edu.sjtu.dcl.dao.bean</value>
+			</list>
+		</property>
+	</bean>
+
+	
+	<!-- <bean id="transcationManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+
+	<tx:advice id="txAdvice" transaction-manager="transcationManager">
+		<tx:attributes>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<tx:method name="merge*" propagation="REQUIRED"/>
+			<tx:method name="save*" propagation="REQUIRED"/>
+			<tx:method name="*" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="allMethod" expression="execution(* cn.edu.sjtu.dcl.dao.*.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="allMethod"/>
+	</aop:config> -->
+	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+          <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="txManager"/>
+	 
+	
+	</beans>
+	

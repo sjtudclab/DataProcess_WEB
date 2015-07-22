@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<composition name="job composition designer">
+    <start location="117,105" name="start">
+        <transition to="DataRemoveDup_1"/>
+    </start>
+    <job iterationtimes="1" iterative="false" jobid="16" location="346,92" name="DataRemoveDup_1">
+        <inputpath>null</inputpath>
+        <outputpath>null</outputpath>
+        <parameters>
+            <property>null</property>
+            <value>undefined</value>
+        </parameters>
+        <transition to="end2"/>
+    </job>
+    <end location="601,103" name="end2"/>
+</composition>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	
+	<bean id="userService" class="cn.edu.sjtu.dcl.service.impl.UserServiceImpl">
+		<property name="userDAO" ref="userDAO"></property>
+	</bean>
+	
+	<bean id="jobService" class="cn.edu.sjtu.dcl.service.impl.JobServiceImpl">
+		<property name="jobDAO" ref="jobDAO"></property>
+	</bean>
+	
+	<bean id="tempService" class="cn.edu.sjtu.dcl.service.impl.TemplateServiceImpl">
+		<property name="tempDAO" ref="tempDAO"></property>
+	</bean>
+	
+	<bean id="historyService" class="cn.edu.sjtu.dcl.service.impl.HistoryServiceImpl">
+		<property name="historyDAO" ref="historyDAO"></property>
+	</bean>
+	
+	<bean id="jobStatusService" class="cn.edu.sjtu.dcl.service.impl.JobStatusServiceImpl">
+		<property name="jobRelationDAO" ref="jobRelationDAO"></property>
+	</bean>
+	
+	</beans>

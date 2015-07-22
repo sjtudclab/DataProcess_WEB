@@ -1,0 +1,67 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+
+<%@ taglib prefix="c" uri="/WEB-INF/tld/c.tld"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>作业执行状态查询</title>
+<link href="../css/bootstrap.css" rel="stylesheet">
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/bootstrap-confirm.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<legend>作业执行状态查询</legend>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td>作业id</td>
+					<td>运行状态</td>
+					<td>开始时间</td>
+					<td>结束时间</td>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${requestScope['list']}" var="job">
+					<tr>
+						<td>${job.jobId }</td>
+						<td>${job.status}</td>
+						<td>${job.startTime }</td>
+						<td>${job.endTime }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<div class="form-actions">
+			<ul class="pager" style="text-align: right">
+
+				<c:if test="${page.hasPreviousPage}">
+					<li><a
+						href="getJobStatus.action?pno=1${searchString}">首页</a></li>
+					<li><a
+						href="getJobStatus.action?pno=${page.currentPage-1 }${searchString}">上一页</a></li>
+				</c:if>
+				<li>每页<c:out value="${page.pageSize}"></c:out>条记录
+				</li>
+				<li>共<c:out value="${page.rowCount}"></c:out>条记录
+				</li>
+				<li>当前第<c:out value="${page.currentPage}"></c:out>/<c:out
+						value="${page.totalPage}"></c:out>页
+				</li>
+				<c:if test="${page.hasNextPage}">
+					<li><a
+						href="getJobStatus.action?pno=${page.currentPage+1 }${searchString}">下一页</a></li>
+					<li><a
+						href="getJobStatus.action?pno=${page.totalPage }${searchString}">末页</a></li>
+				</c:if>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

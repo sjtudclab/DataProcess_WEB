@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<constant name="struts.objectFactory"
+		value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+	<constant name="struts.custom.i18n.resources" value="messages"></constant>
+	<constant name="struts.multipart.maxSize" value="52428800" />
+	
+	<package name="actions" extends="json-default">
+	<default-interceptor-ref name="defaultStack"></default-interceptor-ref>
+	<global-results>
+			<result name="failure" type="redirect">/wrong.html</result>
+		</global-results>
+		
+	<action name="loginAction" class="loginAction">
+			<result name="success" type="redirect">/admin/index.html</result>
+			<result name="failure" type="redirect">/login.html</result>
+		</action>
+		
+		<action name="register" class="userAction" method="register">
+			<result name="success" type="redirect">/login.html</result>
+			<result name="failure" type="redirect">/register.html</result>
+		</action>
+		
+		</package>
+		<package name="admin" namespace="/admin" extends="json-default">
+		<default-interceptor-ref name="defaultStack"></default-interceptor-ref>
+	<global-results>
+			<result name="failure" type="redirect">/wrong.html</result>
+		</global-results>
+		
+		<action name="getJobList" class="jobAction" method="getJobList">
+			<result name="success">/admin/job/job.jsp</result>
+		</action>
+		
+		<action name="flex" class="flexAction" method="redirect">
+			<result name="success">/admin/combine/mrcomposition.jsp</result>
+		</action>
+		
+		<action name="GetJobs" class="jobAction" method="getJobs_http">
+			<result name="success" type="json">
+				<param name="root">ret</param>
+			</result>
+		</action>
+		
+		<action name="getJobById" class="jobAction" method="getJobById">
+			<result name="success">/admin/job/jobmodal.jsp</result>
+		</action>
+		
+		<action name="createJob" class="jobAction" method="createJob">
+			<result name="success" type="redirect">/admin/getJobList.action?pno=1</result>
+		</action>
+		
+		<action name="updateJob" class="jobAction" method="updateJob">
+			<result name="success" type="redirect">/admin/getJobList.action?pno=1</result>
+		</action>
+		
+		<action name="deleteJob" class="jobAction" method="deleteJob">
+			<result name="success" type="redirect">/admin/getPersonalJob.action?pno=1</result>
+		</action>
+		
+		<action name="createTrans" class="jobAction" method="createTrans">
+			<result name="success">/admin/job/createjob.jsp</result>
+		</action>
+		
+		<action name="getPersonalJob" class="jobAction" method="getPersonalJob">
+			<result name="success">/admin/job/personaljob.jsp</result>
+		</action>
+		
+		<action name="getModifyInfo" class="jobAction" method="getModifyInfo">
+			<result name="success">/admin/job/modifyjob.jsp</result>
+		</action>
+		
+		<action name="upload" class="uploadAction" method="upload">
+			<result name="success">/admin/job/personaljob.jsp</result>
+		</action>
+
+		<action name="getJobStatus" class="jobStatusAction" method="getJobStatus">
+			<result name="success">/admin/job/jobstatus.jsp</result>
+		</action>
+		
+		<action name="getTemplateList" class="templateAction" method="getTemplateList">
+			<result name="success">/admin/template/template.jsp</result>
+		</action>
+		
+		<action name="getTemplateById" class="templateAction" method="getTemplateById">
+			<result name="success">/admin/template/templatemodal.jsp</result>
+		</action>
+		
+		<action name="modifyTempInfo" class="templateAction" method="modifyTempInfo">
+			<result name="success">/admin/template/modifytemplate.jsp</result>
+		</action>
+		
+		<action name="createTemplate" class="templateAction" method="createTemplate">
+			<result name="success" type="redirect">/admin/getPersonalTemplate.action?pno=1</result>
+		</action>
+		
+		<action name="updateTemplate" class="templateAction" method="updateTemplate">
+			<result name="success" type="redirect">/admin/getPersonalTemplate.action?pno=1</result>
+		</action>
+		
+		<action name="deleteTemplate" class="templateAction" method="deleteTemplate">
+			<result name="success" type="redirect">/admin/getPersonalTemplate.action?pno=1</result>
+		</action>
+		
+		<action name="getPersonalTemplate" class="templateAction" method="getPersonalTemplate">
+			<result name="success">/admin/template/personaltemplate.jsp</result>
+		</action>
+		
+		<action name="tempTrans" class="templateAction" method="tempTrans">
+			<result name="success">/admin/template/createtemplate.jsp</result>
+		</action>
+		
+		<action name="getHistoryList" class="historyAction" method="getHistoryList">
+			<result name="success">/admin/history/history.jsp</result>
+		</action>
+		
+		<action name="getHistoryById" class="historyAction" method="getHistoryById">
+			<result name="success">/admin/history/historymodal.jsp</result>
+		</action>
+		
+		<action name="createHistory" class="historyAction" method="createHistory">
+			<result name="success" type="redirect">/admin/getHistoryList.action?pno=1</result>
+		</action>
+		
+		<action name="deleteHistory" class="historyAction" method="deleteHistory">
+			<result name="success" type="redirect">/admin/getHistoryList.action?pno=1</result>
+		</action>
+		
+		<action name="getPersonalHistory" class="historyAction" method="getPersonalHistory">
+			<result name="success">/admin/history/history.jsp</result>
+		</action>
+	</package>
+	
+	</struts>

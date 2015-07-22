@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<composition name="job composition designer">
+    <start location="77,165" name="start">
+        <transition to="rmdup_1"/>
+    </start>
+    <job iterationtimes="1" iterative="false" jobid="20" location="243,161" name="rmdup_1">
+        <inputpath>hdfs://172.30.0.202/user/root/input</inputpath>
+        <outputpath>hdfs://172.30.0.202/user/root/middle</outputpath>
+        <parameters>
+            <property>null</property>
+            <value/>
+        </parameters>
+        <transition to="count_2"/>
+    </job>
+    <job iterationtimes="1" iterative="false" jobid="21" location="450,149" name="count_2">
+        <inputpath>hdfs://172.30.0.202/user/root/middle</inputpath>
+        <outputpath>hdfs://172.30.0.202/user/root/output</outputpath>
+        <parameters>
+            <property>null</property>
+            <value/>
+        </parameters>
+        <transition to="end3"/>
+    </job>
+    <end location="643,150" name="end3"/>
+</composition>

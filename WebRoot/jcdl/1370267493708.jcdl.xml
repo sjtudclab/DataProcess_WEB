@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<composition name="job composition designer">
+    <start location="137,153" name="start">
+        <transition to="DBJob_0"/>
+    </start>
+    <job iterationtimes="1" iterative="false" jobid="2" location="301,175" name="DBJob_0">
+        <inputpath>/user/hadoop/examples/input-data</inputpath>
+        <outputpath>/user/hadoop/examples/output-data</outputpath>
+        <parameters>
+            <property>no</property>
+            <value>no</value>
+        </parameters>
+        <transition to="end2"/>
+    </job>
+    
+    <end location="498,176" name="end2"/>
+</composition>

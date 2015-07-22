@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<composition name="job composition designer">
+    <start location="274,252" name="start">
+        <transition to="DBJob_0"/>
+    </start>
+    <job iterationtimes="1" iterative="false" jobid="3" location="469,234" name="DBJob_0">
+        <inputpath>null</inputpath>
+        <outputpath>null</outputpath>
+        <parameters>
+            <property>null</property>
+            <value>undefined</value>
+        </parameters>
+        <transition to="end2"/>
+    </job>
+    
+    <end location="585,269" name="end2"/>
+</composition>

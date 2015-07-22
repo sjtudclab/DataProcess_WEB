@@ -1,0 +1,114 @@
+import java.io.IOException;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.mapreduce.lib.jobcontrol.*;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+
+
+public class $classname
+{
+    public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException
+    {
+        Configuration conf = new Configuration();
+        conf.set("fs.default.name", "$namenode");
+        conf.set("mapred.job.tracker", "$jobtracker");
+        FileSystem fs = FileSystem.get(conf);
+        JobControl jc = new JobControl("jc");
+        #foreach($value in $mrjobs)
+            ###if($velocityCount == 1)
+                if(fs.exists(new Path("$value.getOutputPath()")))
+                    fs.delete(new Path("$value.getOutputPath()"), true);
+            ###end
+            #if(!$value.isIterative() || $value.getIterationtimes() == 1)
+                conf = new Configuration();
+                conf.set("fs.default.name", "$namenode");
+                conf.set("mapred.job.tracker", "$jobtracker");
+                #foreach($p in $value.getPara())
+                    conf.set("$p", "$value.getParameters().get($p)");
+                #end
+                Job $value.getName() = new Job(conf, "$value.getName()");
+                $value.getName() .setJarByClass($classname .class);
+                $value.getName() .setMapperClass($value.getMapper() .class);
+                $value.getName() .setReducerClass($value.getReducer() .class);
+                $value.getName() .setMapOutputKeyClass($value.getMapoutputkey() .class);
+                $value.getName() .setMapOutputValueClass($value.getMapoutputvalue() .class);
+                $value.getName() .setOutputKeyClass($value.getOutputKey() .class);
+                $value.getName() .setOutputValueClass($value.getOutputValue() .class);
+                FileInputFormat.addInputPath($value.getName(), new Path("$value.getInputPath()"));
+                FileOutputFormat.setOutputPath($value.getName(), new Path("$value.getOutputPath()"));
+                ControlledJob cj$value.getName() = new ControlledJob(conf);
+                cj$value.getName() .setJob($value.getName());
+                #foreach($d in $value.getDependencies())
+                    cj$value.getName() .addDependingJob(cj$d);
+                #end
+                jc.addJob(cj$value.getName());
+            #else
+                #foreach($i in [2..$value.getIterationtimes()])
+                    conf = new Configuration();
+                    conf.set("fs.default.name", "$namenode");
+                    conf.set("mapred.job.tracker", "$jobtracker");
+                    #foreach($p in $value.getPara())
+                        conf.set("$p", "$value.getParameters().get($p)");
+                    #end
+                    Job $value.getName()$velocityCount = new Job(conf, "$value.getName()$velocityCount");
+                    #set ($name = $velocityCount)
+                    $value.getName()$name. setJarByClass($classname .class);
+                    $value.getName()$name .setMapperClass($value.getMapper() .class);
+                    $value.getName()$name .setReducerClass($value.getReducer() .class);
+                    $value.getName()$name .setMapOutputKeyClass($value.getMapoutputkey() .class);
+                    $value.getName()$name .setMapOutputValueClass($value.getMapoutputvalue() .class);
+                    $value.getName()$name .setOutputKeyClass($value.getOutputKey() .class);
+                    $value.getName()$name .setOutputValueClass($value.getOutputValue() .class);
+                    FileInputFormat.addInputPath($value.getName()$name, new Path("$value.getInputPath()"));
+                    FileOutputFormat.setOutputPath($value.getName()$name, new Path("$value.getOutputPath()iteration$name"));
+                    ControlledJob cj$value.getName()$name = new ControlledJob(conf);
+                    cj$value.getName()$name .setJob($value.getName()$name);
+                    #if($velocityCount == 1)
+                        #foreach($d in $value.getDependencies())
+                            cj$value.getName()$name .addDependingJob(cj$d);
+                        #end
+                    #else
+                        #set ($m = $velocityCount - 1)
+                        cj$value.getName()$velocityCount .addDependingJob(cj$value.getName()$m);
+                    #end
+                    jc.addJob(cj$value.getName()$velocityCount);
+                #end
+                    conf = new Configuration();
+                    conf.set("fs.default.name", "$namenode");
+                    conf.set("mapred.job.tracker", "$jobtracker");
+                    #foreach($p in $value.getPara())
+                        conf.set("$p", "$value.getParameters().get($p)");
+                    #end
+                    Job $value.getName() = new Job(conf, "$value.getName()");
+                    $value.getName() .setJarByClass($classname .class);
+                    $value.getName() .setMapperClass($value.getMapper() .class);
+                    $value.getName() .setReducerClass($value.getReducer() .class);
+                    $value.getName() .setMapOutputKeyClass($value.getMapoutputkey() .class);
+                    $value.getName() .setMapOutputValueClass($value.getMapoutputvalue() .class);
+                    $value.getName() .setOutputKeyClass($value.getOutputKey() .class);
+                    $value.getName() .setOutputValueClass($value.getOutputValue() .class);
+                    FileInputFormat.addInputPath($value.getName(), new Path("$value.getInputPath()"));
+                    FileOutputFormat.setOutputPath($value.getName(), new Path("$value.getOutputPath()"));
+                    #set ($dd = $value.getIterationtimes() - 1)
+                    ControlledJob cj$value.getName() = new ControlledJob(conf);
+                    cj$value.getName() .setJob($value.getName());
+                    cj$value.getName() .addDependingJob(cj$value.getName()$dd);
+                    jc.addJob(cj$value.getName());
+            #end
+        #end
+        Thread t = new Thread(jc);
+		long start = System.currentTimeMillis();
+		t.start();
+		while (!jc.allFinished())
+		{
+			Thread.sleep(1000);
+		}
+		long end = System.currentTimeMillis();
+		System.out.println("cost time: " + (end - start) + "ms");
+		System.exit(0);
+    }
+}

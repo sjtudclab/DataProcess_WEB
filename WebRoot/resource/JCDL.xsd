@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="composition" type="JCDLComposition"/>
+	<xs:simpleType name="IDENTIFIER">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:complexType name="TRANSITION">
+		<xs:attribute name="to" type="IDENTIFIER" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="START">
+		<xs:sequence>
+			<xs:element name="transition" type="TRANSITION" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="IDENTIFIER" use="required"/>
+		<xs:attribute name="location" type="IDENTIFIER" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="FORK">
+		<xs:sequence>
+			<xs:element name="transition" type="TRANSITION" minOccurs="2" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="IDENTIFIER" use="required"/>
+		<xs:attribute name="location" type="IDENTIFIER" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="JOIN">
+		<xs:sequence>
+			<xs:element name="transition" type="TRANSITION" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="IDENTIFIER" use="required"/>
+		<xs:attribute name="location" type="IDENTIFIER" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="END">
+		<xs:attribute name="name" type="IDENTIFIER" use="required"/>
+		<xs:attribute name="location" type="IDENTIFIER" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="JOB">
+		<xs:sequence>
+			<xs:sequence>
+				<xs:element name="inputpath" type="IDENTIFIER" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="outputpath" type="IDENTIFIER" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="parameters" type="PARA" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="transition" type="TRANSITION" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:sequence>
+		<xs:attribute name="name" type="IDENTIFIER" use="required"/>
+		<xs:attribute name="iterative" type="xs:boolean" use="required"/>
+		<xs:attribute name="iterationtimes" type="xs:integer" use="optional"/>
+		<xs:attribute name="location" type="IDENTIFIER" use="required"/>
+		<xs:attribute name="jobid" type="IDENTIFIER" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="PARA">
+		<xs:sequence minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="property" type="IDENTIFIER" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="value" type="IDENTIFIER" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JCDLComposition">
+		<xs:sequence>
+			<xs:element name="start" type="START" minOccurs="1" maxOccurs="1"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="fork" type="FORK" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="join" type="JOIN" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="job" type="JOB" minOccurs="1" maxOccurs="1"/>
+			</xs:choice>
+			<xs:element name="end" type="END" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="IDENTIFIER" use="required"/>
+	</xs:complexType>
+</xs:schema>

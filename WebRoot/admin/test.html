@@ -1,0 +1,73 @@
+
+<html>
+	<head>
+		<title>Bootstrap Modal Demo</title>
+		
+		<!-- http://scripting.com/stories/2012/01/11/bootstrapModalDemo.html -->
+		
+		<script src="../js/jquery.js"></script>
+		<script src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-modal.js"></script>
+		<link href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.css" rel="stylesheet">
+
+		<style>
+			body {
+				width: 60%;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 100px;
+				}
+			.divDemoBody p {
+				font-size: 24px;
+				line-height: 140%;
+				padding-bottom: 8px;
+				}
+			.divDialogElements input {
+				font-size: 18px;
+				padding: 3px; 
+				height: 32px; 
+				width: 500px; 
+				}
+			.divButton {
+				padding-top: 12px;
+			</style>
+		<script>
+			$(document).ready(function() {
+				$('#windowTitleDialog').bind('show', function () {
+					document.getElementById ("xlInput").value = document.title;
+					});
+				});
+			function closeDialog () {
+				$('#windowTitleDialog').modal('hide'); 
+				};
+			function okClicked () {
+				document.title = document.getElementById ("xlInput").value;
+				closeDialog ();
+				};
+			</script>
+		</head>
+	<body>
+		<div class="divDemoBody">
+			<h1>Bootstrap Modal Demo</h1>
+			<p><a href="http://scripting.com/stories/2012/01/11/bootstrapModalDemo.html">A simple demo</a> of a modal dialog in <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>.</p><p>1. Click the button. 2. Enter a new title for the window. 3. Click OK.</p><p>We set the title of the window and close the dialog.</p>
+			<div id="windowTitleDialog" class="modal hide fade">
+				<div class="modal-header">
+					<a href="#" class="close">&times;</a>
+					<h3>Please enter a new title for this window.</h3>
+					</div>
+				<div class="modal-body">
+					<div class="divDialogElements">
+						<input class="xlarge" id="xlInput" name="xlInput" type="text" />
+						</div>
+					</div>
+				<div class="modal-footer">
+					<a href="#" class="btn primary" onclick="okClicked ();">OK</a>
+					<a href="#" class="btn secondary" onclick="closeDialog ();">Cancel</a>
+					</div>
+				</div>
+			<div class="divButton">
+				<button data-controls-modal="windowTitleDialog" data-backdrop="true" data-keyboard="true" class="btn danger" onmouseover="sandwich='pastrami';">Launch Modal</button>
+				</div>
+			<p style="margin-top: 25px;">Update: There's a new Bootstrap 2.0 <a href="http://bootstrap2modaldemo.blorkmark.com/">modal demo</a>.</p>
+			</div>
+		</body>
+</html>

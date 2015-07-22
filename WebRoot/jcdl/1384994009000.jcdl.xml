@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<composition name="job composition designer">
+    <start location="101,187" name="start">
+
+		<transition to="studentaveragescore_0"/>
+
+	</start>
+ <job iterationtimes="1" iterative="false" jobid="16" location="336,195" name="studentaveragescore_0">
+        		<inputpath>null</inputpath>
+
+		<outputpath>null</outputpath>
+
+		<parameters>
+
+			<property>null</property>
+
+			<value>undefined</value>
+
+			</parameters>
+
+		<transition to="scorecount_3"/>
+
+ 	</job>
+
+	
+
+	<job iterationtimes="1" iterative="false" jobid="17" location="588,185" name="scorecount_3">
+        				<inputpath>null</inputpath>
+
+		<outputpath>null</outputpath>
+
+		<parameters>
+
+			<property>null</property>
+
+			<value>undefined</value>
+
+		</parameters>
+        
+		<transition to="end4"/>
+
+	</job>
+    
+	<end location="650,80" name="end4"/>
+</composition>
