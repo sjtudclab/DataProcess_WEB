@@ -60,52 +60,6 @@ public class ProcessJob extends HttpServlet {
 		// TODO Auto-generated method stub
 	}
 
-	private String driverName = "com.mysql.jdbc.Driver";
-	private String userName = "root";
-	private String userPwd = "123456";
-	private String dbName = "hadoop";
-	private String url = "jdbc:mysql://172.30.0.148/" + dbName + "?user="
-			+ userName + "&password=" + userPwd;
-	private Connection conn = null;
-	public Statement sm = null;
-	public PreparedStatement ps = null;
-
-	public void ConnectDB() {
-		try {
-			Class.forName(driverName).newInstance();
-			conn = DriverManager.getConnection(url);
-			sm = conn.createStatement();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	public void ConnectPreparedDB(String sql) {
-		try {
-			Class.forName(driverName).newInstance();
-			conn = DriverManager.getConnection(url);
-			ps = conn.prepareStatement(sql);
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	public void CloseDB() {
-		try {
-			if (sm != null) {
-				sm.close();
-			}
-			if (ps != null) {
-				ps.close();
-			}
-			conn.close();
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		}
-
-	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -164,31 +118,8 @@ public class ProcessJob extends HttpServlet {
 
 		br.close();
 
-		int style = 0;
-
 		String xml = new String(sb.toString().getBytes("utf-8"));
 		xml = xml.trim();
-		if (xml.contains("averagescore") && xml.contains("scorecount")) {
-			style = 3;
-		} else if (xml.contains("averagescore")) {
-			style = 1;
-		} else if (xml.contains("scorecount")) {
-			style = 2;
-		}
-
-		System.out.println("style:" + style);
-		if (1 == style) {
-			System.out.println("iffffffffffffffffffffffffffffffff");
-			AverageScore();
-		} else if (2 == style) {
-			ScoreCount();
-		} else if (3 == style) {
-			AverageScore();
-			ScoreCount();
-		}
-
-		System.out.println("xmlllllllllllllll:");
-		System.out.println(xml);
 
 		String para = xml.substring(xml.indexOf("para") + 4,
 				xml.indexOf("/para"));
@@ -272,136 +203,6 @@ public class ProcessJob extends HttpServlet {
 		out.flush();
 		out.close();
 
-	}
-
-	private void AverageScore() {
-
-		System.out.println("ResultSet:" + "begin:--------------");
-
-		HashMap<Long, ArrayList<Long>> scoreMap = new HashMap<Long, ArrayList<Long>>();
-		ConnectDB();
-		ResultSet rs = null;
-		try {
-			String sql = "select * from StudentScore";
-			rs = sm.executeQuery(sql);
-
-			System.out.println("ResultSet:" + "here:--------------");
-
-			while (rs.next()) {
-				long studentId = rs.getLong("studentId");
-				long courseId = rs.getLong("courseId");
-				long score = rs.getLong("score");
-
-				System.out.println("studentId:" + studentId);
-				System.out.println("courseId:" + courseId);
-				System.out.println("score:" + score);
-
-				if (scoreMap.containsKey(studentId)) {
-					ArrayList<Long> scores = scoreMap.get(studentId);
-					scores.add(score);
-				} else {
-					ArrayList<Long> scores = new ArrayList<Long>();
-					scores.add(score);
-					scoreMap.put(studentId, scores);
-				}
-			}
-
-			Set<Long> keys = scoreMap.keySet();
-			for (long id : keys) {
-				ArrayList<Long> scores = scoreMap.get(id);
-
-				long ave = 0;
-				for (long s : scores) {
-					ave += s;
-				}
-
-				ave /= scores.size();
-
-				String insertSql = "insert into StudentAveScore(studentId, aveScore) values (?, ?)";
-				ps = conn.prepareStatement(insertSql);
-
-				ps.setLong(1, id);
-				ps.setLong(2, ave);
-
-				ps.executeUpdate();
-			}
-		} catch (SQLException SqlE) {
-			SqlE.printStackTrace();
-		} catch (Exception E) {
-			E.printStackTrace();
-		} finally {
-			CloseDB();
-		}
-	}
-
-	private void ScoreCount() {
-		ConnectDB();
-		ResultSet rs = null;
-		try {
-			String sql = "select * from StudentAveScore";
-			rs = sm.executeQuery(sql);
-
-			int under60 = 0;
-			int ll70 = 0;
-			int ll80 = 0;
-			int ll90 = 0;
-			int ll100 = 0;
-
-			while (rs.next()) {
-				long studentId = rs.getLong("studentId");
-				long score = rs.getLong("aveScore");
-
-				System.out.println("studentId:" + studentId);
-				System.out.println("aveScore:" + score);
-
-				if (score < 60) {
-					under60++;
-
-				} else if (score >= 60 && score < 70) {
-					ll70++;
-				} else if (score >= 70 && score < 80) {
-					ll80++;
-				} else if (score >= 80 && score < 90) {
-					ll90++;
-				} else if (score >= 90 && score <= 100) {
-					ll100++;
-				}
-			}
-
-			String insertSql = "insert into ScoreCount(score, count) values (?, ?)";
-			ps = conn.prepareStatement(insertSql);
-
-			ps.setLong(1, 60);
-			ps.setLong(2, under60);
-
-			ps.executeUpdate();
-
-			ps.setLong(1, 70);
-			ps.setLong(2, ll70);
-
-			ps.executeUpdate();
-
-			ps.setLong(1, 80);
-			ps.setLong(2, ll80);
-
-			ps.executeUpdate();
-
-			ps.setLong(1, 90);
-			ps.setLong(2, ll90);
-
-			ps.executeUpdate();
-
-			ps.setLong(1, 100);
-			ps.setLong(2, ll100);
-
-			ps.executeUpdate();
-		} catch (SQLException SqlE) {
-			SqlE.printStackTrace();
-		} catch (Exception E) {
-			E.printStackTrace();
-		} finally {
-			CloseDB();
-		}
 	}
 
 	private String[] applyForCluster() {

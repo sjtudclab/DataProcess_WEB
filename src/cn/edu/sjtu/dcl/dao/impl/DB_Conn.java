@@ -10,9 +10,12 @@ public class DB_Conn
 {	
 	private String driverName = "com.mysql.jdbc.Driver";
 	private String userName = "root";
-	private String userPwd = "123456";
-    private String dbName = "trafficdataprocess";
-    private String url = "jdbc:mysql://172.30.0.202:3306/" + dbName +
+	//private String userPwd = "123456";
+    private String userPwd = "root";
+	private String dbName = "trafficdataprocess";
+	//private String serverIp = "172.30.0.202";
+	private String serverIp = "192.168.1.254";
+    private String url = "jdbc:mysql://" + serverIp + ":3306/" + dbName +
                     "?user=" + userName + "&password=" + userPwd;
     private Connection conn = null;
     public Statement sm = null;
