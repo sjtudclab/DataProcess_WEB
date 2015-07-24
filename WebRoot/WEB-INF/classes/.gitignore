@@ -1,1 +1,10 @@
+/applicationContext-actions.xml
+/applicationContext-businesses.xml
+/applicationContext-daos.xml
+/cluster.conf
 /cn/
+/crossdomain.xml
+/log4j.properties
+/oozie.conf
+/struts.xml
+/vm/

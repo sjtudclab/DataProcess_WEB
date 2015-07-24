@@ -1,0 +1,4 @@
+1. applicationContext-daos.xml     db config
+2. DB_conn.java			   db config
+3. WebRoot/admin/config.xml
+4. 

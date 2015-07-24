@@ -6,7 +6,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CodingErrorAction;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,11 +22,13 @@ import java.util.HashMap;
 import java.util.Set;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.hadoop.io.LongWritable;
+import org.omg.CORBA_2_3.portable.InputStream;
 
 import cn.edu.sjtu.dcl.dao.bean.Job;
 import cn.edu.sjtu.dcl.dao.bean.User;
@@ -59,7 +65,7 @@ public class ProcessJob extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -72,16 +78,24 @@ public class ProcessJob extends HttpServlet {
 		System.out.println(users.getId());
 
 		String schemaPath = "resource/JCDL.xsd";
-		PrintWriter out = response.getWriter();
-		BufferedReader br = request.getReader();
 
+		ServletInputStream input = request.getInputStream();
+		CharsetDecoder decoder = Charset.forName("UTF-8").newDecoder();
+		decoder.onMalformedInput(CodingErrorAction.IGNORE);
+		InputStreamReader reader = new InputStreamReader(input, decoder);
+		BufferedReader br = new BufferedReader(reader);
+		
+		PrintWriter out = response.getWriter();
+		
 		StringBuffer sb = new StringBuffer();
 		String value = null;
 
+		
 		try {
 			while ((value = br.readLine()) != null) {
 				sb.append(value);
 				sb.append("\r\n");
+				System.out.println(value);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,7 +104,8 @@ public class ProcessJob extends HttpServlet {
 				sb.delete(0, sb.length() - 1);
 			}
 			
-			File file = new File("/root/input.txt");
+			/*
+			File file = new File("input.txt");
 			BufferedReader reader = null;
 			try {
 				reader = new BufferedReader(new FileReader(file));
@@ -114,18 +129,30 @@ public class ProcessJob extends HttpServlet {
 					}
 				}
 			}
+			*/
 		}
 
 		br.close();
-
+		
 		String xml = new String(sb.toString().getBytes("utf-8"));
 		xml = xml.trim();
 
+		System.out.println(xml);
 		String para = xml.substring(xml.indexOf("para") + 4,
 				xml.indexOf("/para"));
 		System.out.println(para);
 		String[] parameter = para.split(",");
 		xml = xml.substring(xml.indexOf('<'), xml.length());
+		
+		while (xml.contains("<parameters>")) {
+			int start = xml.indexOf("<parameters>");
+			int end = xml.indexOf("</parameters>") + 13;
+			
+			xml = xml.substring(0, start) + xml.substring(end, xml.length());
+			System.out.println(xml);
+		}
+		
+		
 		System.out.println(xml);
 		String jcdl = System.currentTimeMillis() + ".jcdl.xml";
 		String path = request.getSession().getServletContext().getRealPath("/");
@@ -134,6 +161,7 @@ public class ProcessJob extends HttpServlet {
 		bw.write(xml);
 		bw.flush();
 		bw.close();
+		
 		ValidatorFacade validator = new ValidatorFacade(path + File.separator
 				+ schemaPath);
 
@@ -142,6 +170,7 @@ public class ProcessJob extends HttpServlet {
 			out.write("jcdl is not valid");
 			return;
 		}
+		
 		String[] cluster = applyForCluster();
 		if (parameter[2].equals("oozie")) {
 			try {
