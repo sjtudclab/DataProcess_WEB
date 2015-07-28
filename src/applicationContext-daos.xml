@@ -14,21 +14,22 @@
 	http://www.springframework.org/schema/util/spring-util.xsd">
 	<!-- 定义数据源Bean，使用C3P0数据源实现 -->
 	
-	
+	<!--
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="username" value="root"/>
 		<property name="url" value="jdbc:mysql://192.168.1.254:3306/trafficdataprocess?characterEncoding=utf-8"/>
 		<property name="password" value="root"/>
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 	</bean>
- 	<!--  
+	-->
+ 	  
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="username" value="root"/>
 		<property name="url" value="jdbc:mysql://172.30.0.202:3306/trafficdataprocess?characterEncoding=utf-8"/>
 		<property name="password" value="123456"/>
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 	</bean>
-	-->
+	
 	
 	<bean id="userDAO" class="cn.edu.sjtu.dcl.dao.impl.UserDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>

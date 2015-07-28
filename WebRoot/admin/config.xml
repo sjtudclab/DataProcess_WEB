@@ -1,4 +1,4 @@
 <?xml version="1.0" ?>
 <Config>
-	<ServerUrl>http://localhost:8080</ServerUrl>
+	<ServerUrl>http://172.30.0.202:8080</ServerUrl>
 </Config>
